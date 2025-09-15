@@ -46,6 +46,16 @@
             opacity: 0.9;
         }
         
+        /* Страница с кнопками */
+        .page {
+            display: none;
+            animation: fadeIn 0.5s ease;
+        }
+        
+        .page.active {
+            display: block;
+        }
+        
         .buttons-container {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
@@ -66,6 +76,7 @@
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
             text-align: left;
             line-height: 1.4;
+            min-height: 80px;
         }
         
         .btn:hover {
@@ -74,25 +85,81 @@
             background: linear-gradient(45deg, #2980b9, #1f5f8b);
         }
         
-        .btn:active {
-            transform: translateY(0);
-        }
-        
-        .content {
+        /* Страница с контентом */
+        .content-page {
             padding: 30px;
-            display: none;
             background: #f8f9fa;
-            border-top: 3px solid #3498db;
+            min-height: calc(100vh - 200px);
+            position: relative;
         }
         
-        .content.active {
-            display: block;
-            animation: fadeIn 0.5s ease;
+        .content-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid #3498db;
         }
         
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
+        .content-title {
+            font-size: 1.8rem;
+            color: #2c3e50;
+            font-weight: 700;
+        }
+        
+        .back-btn {
+            background: #6c757d;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: background 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .back-btn:hover {
+            background: #5a6268;
+        }
+        
+        .back-btn::before {
+            content: "←";
+            font-size: 1.2rem;
+        }
+        
+        .home-btn {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: #28a745;
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 50px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            z-index: 1000;
+        }
+        
+        .home-btn:hover {
+            background: #218838;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+        }
+        
+        .home-btn::before {
+            content: "⌂";
+            font-size: 1.2rem;
         }
         
         .question {
@@ -136,20 +203,9 @@
             font-weight: bold;
         }
         
-        .back-btn {
-            background: #6c757d;
-            color: white;
-            border: none;
-            padding: 12px 25px;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 1rem;
-            margin-top: 20px;
-            transition: background 0.3s;
-        }
-        
-        .back-btn:hover {
-            background: #5a6268;
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
         }
         
         @media (max-width: 768px) {
@@ -160,6 +216,23 @@
             h1 {
                 font-size: 2rem;
             }
+            
+            .content-header {
+                flex-direction: column;
+                gap: 15px;
+                align-items: flex-start;
+            }
+            
+            .back-btn {
+                align-self: flex-end;
+            }
+            
+            .home-btn {
+                bottom: 20px;
+                right: 20px;
+                padding: 10px 16px;
+                font-size: 0.9rem;
+            }
         }
     </style>
 </head>
@@ -167,93 +240,100 @@
     <div class="container">
         <header>
             <h1>Ответы в НКИ</h1>
-            <p class="subtitle">Готовые Ответы </p>
+            <p class="subtitle">Образовательные материалы для профессиональной подготовки</p>
         </header>
         
-        <div class="buttons-container">
-            <button class="btn" onclick="showContent('content1')">
-                Переподготовка Стропальщик 2 разряда
-            </button>
-            
-            <button class="btn" onclick="showContent('content2')">
-                Программа обучения «Безопасные методы и приемы выполнения работ на высоте» (2 группа по безопасности работ на высоте)
-            </button>
-            
-            <button class="btn" onclick="showContent('content3')">
-                Эксплуатация и обслуживание сосудов, работающих под избыточным давлением
-            </button>
-            
-            <button class="btn" onclick="showContent('content4')">
-                Эксплуатация и обслуживание грузоподъемных механизмов, управляемых с пола или со стационарного пульта
-            </button>
-            
-            <button class="btn" onclick="showContent('content5')">
-                Подтверждение квалификации по рабочей профессии «Оператор по подготовке скважин к капитальному и подземному ремонтам» 4-5 разряда
-            </button>
-            
-            <button class="btn" onclick="showContent('content6')">
-                Кнопка 6
-            </button>
-            
-            <button class="btn" onclick="showContent('content7')">
-                Кнопка 7
-            </button>
-            
-            <button class="btn" onclick="showContent('content8')">
-                Кнопка 8
-            </button>
-            
-            <button class="btn" onclick="showContent('content9')">
-                Кнопка 9
-            </button>
-            
-            <button class="btn" onclick="showContent('content10')">
-                Кнопка 10
-            </button>
-            
-            <button class="btn" onclick="showContent('content11')">
-                Кнопка 11
-            </button>
-            
-            <button class="btn" onclick="showContent('content12')">
-                Кнопка 12
-            </button>
-            
-            <button class="btn" onclick="showContent('content13')">
-                Кнопка 13
-            </button>
-            
-            <button class="btn" onclick="showContent('content14')">
-                Кнопка 14
-            </button>
-            
-            <button class="btn" onclick="showContent('content15')">
-                Кнопка 15
-            </button>
-            
-            <button class="btn" onclick="showContent('content16')">
-                Кнопка 16
-            </button>
-            
-            <button class="btn" onclick="showContent('content17')">
-                Кнопка 17
-            </button>
-            
-            <button class="btn" onclick="showContent('content18')">
-                Кнопка 18
-            </button>
-            
-            <button class="btn" onclick="showContent('content19')">
-                Кнопка 19
-            </button>
-            
-            <button class="btn" onclick="showContent('content20')">
-                Кнопка 20
-            </button>
+        <!-- Страница с кнопками -->
+        <div id="buttons-page" class="page active">
+            <div class="buttons-container">
+                <button class="btn" onclick="showContentPage(1)">
+                    Переподготовка Стропальщик 2 разряда
+                </button>
+                
+                <button class="btn" onclick="showContentPage(2)">
+                    Программа обучения «Безопасные методы и приемы выполнения работ на высоте» (2 группа по безопасности работ на высоте)
+                </button>
+                
+                <button class="btn" onclick="showContentPage(3)">
+                    Кнопка 3
+                </button>
+                
+                <button class="btn" onclick="showContentPage(4)">
+                    Кнопка 4
+                </button>
+                
+                <button class="btn" onclick="showContentPage(5)">
+                    Кнопка 5
+                </button>
+                
+                <button class="btn" onclick="showContentPage(6)">
+                    Кнопка 6
+                </button>
+                
+                <button class="btn" onclick="showContentPage(7)">
+                    Кнопка 7
+                </button>
+                
+                <button class="btn" onclick="showContentPage(8)">
+                    Кнопка 8
+                </button>
+                
+                <button class="btn" onclick="showContentPage(9)">
+                    Кнопка 9
+                </button>
+                
+                <button class="btn" onclick="showContentPage(10)">
+                    Кнопка 10
+                </button>
+                
+                <button class="btn" onclick="showContentPage(11)">
+                    Кнопка 11
+                </button>
+                
+                <button class="btn" onclick="showContentPage(12)">
+                    Кнопка 12
+                </button>
+                
+                <button class="btn" onclick="showContentPage(13)">
+                    Кнопка 13
+                </button>
+                
+                <button class="btn" onclick="showContentPage(14)">
+                    Кнопка 14
+                </button>
+                
+                <button class="btn" onclick="showContentPage(15)">
+                    Кнопка 15
+                </button>
+                
+                <button class="btn" onclick="showContentPage(16)">
+                    Кнопка 16
+                </button>
+                
+                <button class="btn" onclick="showContentPage(17)">
+                    Кнопка 17
+                </button>
+                
+                <button class="btn" onclick="showContentPage(18)">
+                    Кнопка 18
+                </button>
+                
+                <button class="btn" onclick="showContentPage(19)">
+                    Кнопка 19
+                </button>
+                
+                <button class="btn" onclick="showContentPage(20)">
+                    Кнопка 20
+                </button>
+            </div>
         </div>
         
-        <div id="content1" class="content">
-            <h2>Переподготовка Стропальщик 2 разряда</h2>
+        <!-- Страницы с контентом -->
+        <div id="content-page-1" class="page content-page">
+            <div class="content-header">
+                <h2 class="content-title">Переподготовка Стропальщик 2 разряда</h2>
+                <button class="back-btn" onclick="showButtonsPage()">Назад</button>
+            </div>
             
             <div class="question">
                 <div class="question-title">1 Стропальщик в своей работе подчиняется:</div>
@@ -345,23 +425,15 @@
                     <li class="correct">снабжаются предохранительным замком во всех случаях, кроме тех, когда краны транспортируют расплавленный металл или жидкий шлак при использовании безлюдных технологий в условиях интенсивного теплового излучения</li>
                 </ul>
             </div>
-			
-			<div class="question">
-                <div class="question-title">11 Основанием портального крана является:</div>
-                <ul class="answers">
-                    <li>опорно-поворотная платформа</li>
-                    <li>приводное устройство для передвижения крана</li>
-                    <li class="correct">портал</li>
-                </ul>
-            </div>
-			
-			
             
-            <button class="back-btn" onclick="hideContent()">Вернуться к выбору</button>
+            <button class="home-btn" onclick="showButtonsPage()">На главную</button>
         </div>
         
-        <div id="content2" class="content">
-            <h2>Программа обучения «Безопасные методы и приемы выполнения работ на высоте» (2 группа по безопасности работ на высоте)</h2>
+        <div id="content-page-2" class="page content-page">
+            <div class="content-header">
+                <h2 class="content-title">Программа обучения «Безопасные методы и приемы выполнения работ на высоте» (2 группа по безопасности работ на высоте)</h2>
+                <button class="back-btn" onclick="showButtonsPage()">Назад</button>
+            </div>
             
             <div class="question">
                 <div class="question-title">Подниматься на кровлю и спускаться с нее следует только по:</div>
@@ -510,146 +582,204 @@
                 </ul>
             </div>
             
-            <button class="back-btn" onclick="hideContent()">Вернуться к выбору</button>
+            <button class="home-btn" onclick="showButtonsPage()">На главную</button>
         </div>
         
         <!-- Шаблоны для остальных кнопок -->
-        <div id="content3" class="content">
-            <h2>Кнопка 3</h2>
+        <div id="content-page-3" class="page content-page">
+            <div class="content-header">
+                <h2 class="content-title">Кнопка 3</h2>
+                <button class="back-btn" onclick="showButtonsPage()">Назад</button>
+            </div>
             <p>Контент для этой кнопки в разработке.</p>
-            <button class="back-btn" onclick="hideContent()">Вернуться к выбору</button>
+            <button class="home-btn" onclick="showButtonsPage()">На главную</button>
         </div>
         
-        <div id="content4" class="content">
-            <h2>Кнопка 4</h2>
+        <div id="content-page-4" class="page content-page">
+            <div class="content-header">
+                <h2 class="content-title">Кнопка 4</h2>
+                <button class="back-btn" onclick="showButtonsPage()">Назад</button>
+            </div>
             <p>Контент для этой кнопки в разработке.</p>
-            <button class="back-btn" onclick="hideContent()">Вернуться к выбору</button>
+            <button class="home-btn" onclick="showButtonsPage()">На главную</button>
         </div>
         
-        <div id="content5" class="content">
-            <h2>Кнопка 5</h2>
+        <div id="content-page-5" class="page content-page">
+            <div class="content-header">
+                <h2 class="content-title">Кнопка 5</h2>
+                <button class="back-btn" onclick="showButtonsPage()">Назад</button>
+            </div>
             <p>Контент для этой кнопки в разработке.</p>
-            <button class="back-btn" onclick="hideContent()">Вернуться к выбору</button>
+            <button class="home-btn" onclick="showButtonsPage()">На главную</button>
         </div>
         
-        <div id="content6" class="content">
-            <h2>Кнопка 6</h2>
+        <div id="content-page-6" class="page content-page">
+            <div class="content-header">
+                <h2 class="content-title">Кнопка 6</h2>
+                <button class="back-btn" onclick="showButtonsPage()">Назад</button>
+            </div>
             <p>Контент для этой кнопки в разработке.</p>
-            <button class="back-btn" onclick="hideContent()">Вернуться к выбору</button>
+            <button class="home-btn" onclick="showButtonsPage()">На главную</button>
         </div>
         
-        <div id="content7" class="content">
-            <h2>Кнопка 7</h2>
+        <div id="content-page-7" class="page content-page">
+            <div class="content-header">
+                <h2 class="content-title">Кнопка 7</h2>
+                <button class="back-btn" onclick="showButtonsPage()">Назад</button>
+            </div>
             <p>Контент для этой кнопки в разработке.</p>
-            <button class="back-btn" onclick="hideContent()">Вернуться к выбору</button>
+            <button class="home-btn" onclick="showButtonsPage()">На главную</button>
         </div>
         
-        <div id="content8" class="content">
-            <h2>Кнопка 8</h2>
+        <div id="content-page-8" class="page content-page">
+            <div class="content-header">
+                <h2 class="content-title">Кнопка 8</h2>
+                <button class="back-btn" onclick="showButtonsPage()">Назад</button>
+            </div>
             <p>Контент для этой кнопки в разработке.</p>
-            <button class="back-btn" onclick="hideContent()">Вернуться к выбору</button>
+            <button class="home-btn" onclick="showButtonsPage()">На главную</button>
         </div>
         
-        <div id="content9" class="content">
-            <h2>Кнопка 9</h2>
+        <div id="content-page-9" class="page content-page">
+            <div class="content-header">
+                <h2 class="content-title">Кнопка 9</h2>
+                <button class="back-btn" onclick="showButtonsPage()">Назад</button>
+            </div>
             <p>Контент для этой кнопки в разработке.</p>
-            <button class="back-btn" onclick="hideContent()">Вернуться к выбору</button>
+            <button class="home-btn" onclick="showButtonsPage()">На главную</button>
         </div>
         
-        <div id="content10" class="content">
-            <h2>Кнопка 10</h2>
+        <div id="content-page-10" class="page content-page">
+            <div class="content-header">
+                <h2 class="content-title">Кнопка 10</h2>
+                <button class="back-btn" onclick="showButtonsPage()">Назад</button>
+            </div>
             <p>Контент для этой кнопки в разработке.</p>
-            <button class="back-btn" onclick="hideContent()">Вернуться к выбору</button>
+            <button class="home-btn" onclick="showButtonsPage()">На главную</button>
         </div>
         
-        <div id="content11" class="content">
-            <h2>Кнопка 11</h2>
+        <div id="content-page-11" class="page content-page">
+            <div class="content-header">
+                <h2 class="content-title">Кнопка 11</h2>
+                <button class="back-btn" onclick="showButtonsPage()">Назад</button>
+            </div>
             <p>Контент для этой кнопки в разработке.</p>
-            <button class="back-btn" onclick="hideContent()">Вернуться к выбору</button>
+            <button class="home-btn" onclick="showButtonsPage()">На главную</button>
         </div>
         
-        <div id="content12" class="content">
-            <h2>Кнопка 12</h2>
+        <div id="content-page-12" class="page content-page">
+            <div class="content-header">
+                <h2 class="content-title">Кнопка 12</h2>
+                <button class="back-btn" onclick="showButtonsPage()">Назад</button>
+            </div>
             <p>Контент для этой кнопки в разработке.</p>
-            <button class="back-btn" onclick="hideContent()">Вернуться к выбору</button>
+            <button class="home-btn" onclick="showButtonsPage()">На главную</button>
         </div>
         
-        <div id="content13" class="content">
-            <h2>Кнопка 13</h2>
+        <div id="content-page-13" class="page content-page">
+            <div class="content-header">
+                <h2 class="content-title">Кнопка 13</h2>
+                <button class="back-btn" onclick="showButtonsPage()">Назад</button>
+            </div>
             <p>Контент для этой кнопки в разработке.</p>
-            <button class="back-btn" onclick="hideContent()">Вернуться к выбору</button>
+            <button class="home-btn" onclick="showButtonsPage()">На главную</button>
         </div>
         
-        <div id="content14" class="content">
-            <h2>Кнопка 14</h2>
+        <div id="content-page-14" class="page content-page">
+            <div class="content-header">
+                <h2 class="content-title">Кнопка 14</h2>
+                <button class="back-btn" onclick="showButtonsPage()">Назад</button>
+            </div>
             <p>Контент для этой кнопки в разработке.</p>
-            <button class="back-btn" onclick="hideContent()">Вернуться к выбору</button>
+            <button class="home-btn" onclick="showButtonsPage()">На главную</button>
         </div>
         
-        <div id="content15" class="content">
-            <h2>Кнопка 15</h2>
+        <div id="content-page-15" class="page content-page">
+            <div class="content-header">
+                <h2 class="content-title">Кнопка 15</h2>
+                <button class="back-btn" onclick="showButtonsPage()">Назад</button>
+            </div>
             <p>Контент для этой кнопки в разработке.</p>
-            <button class="back-btn" onclick="hideContent()">Вернуться к выбору</button>
+            <button class="home-btn" onclick="showButtonsPage()">На главную</button>
         </div>
         
-        <div id="content16" class="content">
-            <h2>Кнопка 16</h2>
+        <div id="content-page-16" class="page content-page">
+            <div class="content-header">
+                <h2 class="content-title">Кнопка 16</h2>
+                <button class="back-btn" onclick="showButtonsPage()">Назад</button>
+            </div>
             <p>Контент для этой кнопки в разработке.</p>
-            <button class="back-btn" onclick="hideContent()">Вернуться к выбору</button>
+            <button class="home-btn" onclick="showButtonsPage()">На главную</button>
         </div>
         
-        <div id="content17" class="content">
-            <h2>Кнопка 17</h2>
+        <div id="content-page-17" class="page content-page">
+            <div class="content-header">
+                <h2 class="content-title">Кнопка 17</h2>
+                <button class="back-btn" onclick="showButtonsPage()">Назад</button>
+            </div>
             <p>Контент для этой кнопки в разработке.</p>
-            <button class="back-btn" onclick="hideContent()">Вернуться к выбору</button>
+            <button class="home-btn" onclick="showButtonsPage()">На главную</button>
         </div>
         
-        <div id="content18" class="content">
-            <h2>Кнопка 18</h2>
+        <div id="content-page-18" class="page content-page">
+            <div class="content-header">
+                <h2 class="content-title">Кнопка 18</h2>
+                <button class="back-btn" onclick="showButtonsPage()">Назад</button>
+            </div>
             <p>Контент для этой кнопки в разработке.</p>
-            <button class="back-btn" onclick="hideContent()">Вернуться к выбору</button>
+            <button class="home-btn" onclick="showButtonsPage()">На главную</button>
         </div>
         
-        <div id="content19" class="content">
-            <h2>Кнопка 19</h2>
+        <div id="content-page-19" class="page content-page">
+            <div class="content-header">
+                <h2 class="content-title">Кнопка 19</h2>
+                <button class="back-btn" onclick="showButtonsPage()">Назад</button>
+            </div>
             <p>Контент для этой кнопки в разработке.</p>
-            <button class="back-btn" onclick="hideContent()">Вернуться к выбору</button>
+            <button class="home-btn" onclick="showButtonsPage()">На главную</button>
         </div>
         
-        <div id="content20" class="content">
-            <h2>Кнопка 20</h2>
+        <div id="content-page-20" class="page content-page">
+            <div class="content-header">
+                <h2 class="content-title">Кнопка 20</h2>
+                <button class="back-btn" onclick="showButtonsPage()">Назад</button>
+            </div>
             <p>Контент для этой кнопки в разработке.</p>
-            <button class="back-btn" onclick="hideContent()">Вернуться к выбору</button>
+            <button class="home-btn" onclick="showButtonsPage()">На главную</button>
         </div>
     </div>
 
     <script>
-        function showContent(contentId) {
-            // Скрываем все контенты
-            const contents = document.querySelectorAll('.content');
-            contents.forEach(content => {
-                content.classList.remove('active');
+        function showContentPage(pageNumber) {
+            // Скрываем все страницы
+            const pages = document.querySelectorAll('.page');
+            pages.forEach(page => {
+                page.classList.remove('active');
             });
             
-            // Показываем выбранный контент
-            document.getElementById(contentId).classList.add('active');
+            // Показываем выбранную страницу с контентом
+            document.getElementById(`content-page-${pageNumber}`).classList.add('active');
             
-            // Прокручиваем к началу контента
+            // Прокручиваем к началу страницы
             window.scrollTo({
                 top: 0,
                 behavior: 'smooth'
             });
         }
         
-        function hideContent() {
-            // Скрываем все контенты
-            const contents = document.querySelectorAll('.content');
-            contents.forEach(content => {
-                content.classList.remove('active');
+        function showButtonsPage() {
+            // Скрываем все страницы
+            const pages = document.querySelectorAll('.page');
+            pages.forEach(page => {
+                page.classList.remove('active');
             });
             
-            // Прокручиваем к кнопкам
-            document.querySelector('.buttons-container').scrollIntoView({
+            // Показываем страницу с кнопками
+            document.getElementById('buttons-page').classList.add('active');
+            
+            // Прокручиваем к началу страницы
+            window.scrollTo({
+                top: 0,
                 behavior: 'smooth'
             });
         }
