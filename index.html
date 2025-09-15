@@ -1,0 +1,658 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ответы в НКИ</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #1a2a6c, #b21f1f, #fdbb2d);
+            min-height: 100vh;
+            padding: 20px;
+            color: #333;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            overflow: hidden;
+        }
+        
+        header {
+            background: linear-gradient(45deg, #2c3e50, #3498db);
+            color: white;
+            padding: 30px 20px;
+            text-align: center;
+        }
+        
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+        
+        .subtitle {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+        
+        .buttons-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+            padding: 30px;
+        }
+        
+        .btn {
+            background: linear-gradient(45deg, #3498db, #2980b9);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            padding: 20px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            text-align: left;
+            line-height: 1.4;
+        }
+        
+        .btn:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.3);
+            background: linear-gradient(45deg, #2980b9, #1f5f8b);
+        }
+        
+        .btn:active {
+            transform: translateY(0);
+        }
+        
+        .content {
+            padding: 30px;
+            display: none;
+            background: #f8f9fa;
+            border-top: 3px solid #3498db;
+        }
+        
+        .content.active {
+            display: block;
+            animation: fadeIn 0.5s ease;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .question {
+            margin-bottom: 25px;
+            padding: 20px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        
+        .question-title {
+            font-weight: 700;
+            color: #2c3e50;
+            margin-bottom: 15px;
+            font-size: 1.1rem;
+        }
+        
+        .answers {
+            list-style-type: none;
+        }
+        
+        .answers li {
+            margin-bottom: 10px;
+            padding: 8px 15px;
+            background: #f1f2f6;
+            border-radius: 5px;
+            position: relative;
+            padding-left: 30px;
+        }
+        
+        .answers li.correct {
+            background: #d4edda;
+            font-weight: 600;
+        }
+        
+        .answers li.correct::before {
+            content: "✓";
+            position: absolute;
+            left: 10px;
+            color: #28a745;
+            font-weight: bold;
+        }
+        
+        .back-btn {
+            background: #6c757d;
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1rem;
+            margin-top: 20px;
+            transition: background 0.3s;
+        }
+        
+        .back-btn:hover {
+            background: #5a6268;
+        }
+        
+        @media (max-width: 768px) {
+            .buttons-container {
+                grid-template-columns: 1fr;
+            }
+            
+            h1 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Ответы в НКИ</h1>
+            <p class="subtitle">Готовые Ответы </p>
+        </header>
+        
+        <div class="buttons-container">
+            <button class="btn" onclick="showContent('content1')">
+                Переподготовка Стропальщик 2 разряда
+            </button>
+            
+            <button class="btn" onclick="showContent('content2')">
+                Программа обучения «Безопасные методы и приемы выполнения работ на высоте» (2 группа по безопасности работ на высоте)
+            </button>
+            
+            <button class="btn" onclick="showContent('content3')">
+                Эксплуатация и обслуживание сосудов, работающих под избыточным давлением
+            </button>
+            
+            <button class="btn" onclick="showContent('content4')">
+                Эксплуатация и обслуживание грузоподъемных механизмов, управляемых с пола или со стационарного пульта
+            </button>
+            
+            <button class="btn" onclick="showContent('content5')">
+                Подтверждение квалификации по рабочей профессии «Оператор по подготовке скважин к капитальному и подземному ремонтам» 4-5 разряда
+            </button>
+            
+            <button class="btn" onclick="showContent('content6')">
+                Кнопка 6
+            </button>
+            
+            <button class="btn" onclick="showContent('content7')">
+                Кнопка 7
+            </button>
+            
+            <button class="btn" onclick="showContent('content8')">
+                Кнопка 8
+            </button>
+            
+            <button class="btn" onclick="showContent('content9')">
+                Кнопка 9
+            </button>
+            
+            <button class="btn" onclick="showContent('content10')">
+                Кнопка 10
+            </button>
+            
+            <button class="btn" onclick="showContent('content11')">
+                Кнопка 11
+            </button>
+            
+            <button class="btn" onclick="showContent('content12')">
+                Кнопка 12
+            </button>
+            
+            <button class="btn" onclick="showContent('content13')">
+                Кнопка 13
+            </button>
+            
+            <button class="btn" onclick="showContent('content14')">
+                Кнопка 14
+            </button>
+            
+            <button class="btn" onclick="showContent('content15')">
+                Кнопка 15
+            </button>
+            
+            <button class="btn" onclick="showContent('content16')">
+                Кнопка 16
+            </button>
+            
+            <button class="btn" onclick="showContent('content17')">
+                Кнопка 17
+            </button>
+            
+            <button class="btn" onclick="showContent('content18')">
+                Кнопка 18
+            </button>
+            
+            <button class="btn" onclick="showContent('content19')">
+                Кнопка 19
+            </button>
+            
+            <button class="btn" onclick="showContent('content20')">
+                Кнопка 20
+            </button>
+        </div>
+        
+        <div id="content1" class="content">
+            <h2>Переподготовка Стропальщик 2 разряда</h2>
+            
+            <div class="question">
+                <div class="question-title">1 Стропальщик в своей работе подчиняется:</div>
+                <ul class="answers">
+                    <li>крановщику</li>
+                    <li class="correct">лицу, ответственному за безопасное производство работ кранами</li>
+                    <li>инспектору Госгортехнадзора</li>
+                </ul>
+            </div>
+            
+            <div class="question">
+                <div class="question-title">2 Соответствие вылета стрелы крана массе поднимаемого груза проверяется стропальщиком:</div>
+                <ul class="answers">
+                    <li>визуально</li>
+                    <li class="correct">по указателю грузоподъемности крана</li>
+                    <li>по указателю угла наклона крана</li>
+                    <li>по наклону крана</li>
+                </ul>
+            </div>
+            
+            <div class="question">
+                <div class="question-title">3 Подъем и перемещение груза, на который не разработаны схемы строповки:</div>
+                <ul class="answers">
+                    <li class="correct">производить запрещается</li>
+                    <li>должны производиться опытным стропальщиком</li>
+                    <li>производить по договоренности с крановщиком</li>
+                </ul>
+            </div>
+            
+            <div class="question">
+                <div class="question-title">4 По возможности поворота башни различают башенные краны:</div>
+                <ul class="answers">
+                    <li class="correct">с поворотной и неповоротной башней</li>
+                    <li>с неповоротной башней и башней постоянной высоты</li>
+                    <li>с поворотной башней и башней переменной высоты</li>
+                    <li>с башней переменной и постоянной высоты</li>
+                </ul>
+            </div>
+            
+            <div class="question">
+                <div class="question-title">5 Различают стальные цепи:</div>
+                <ul class="answers">
+                    <li>сварные или штампованные</li>
+                    <li>сварные или пластинчатые</li>
+                    <li class="correct">сварные, штампованные или пластинчатые</li>
+                </ul>
+            </div>
+            
+            <div class="question">
+                <div class="question-title">6 Для предотвращения самопроизвольного разворота длинномерных и громоздких грузов во время их подъема или перемещения применяются:</div>
+                <ul class="answers">
+                    <li class="correct">специальные оттяжки</li>
+                    <li>багры</li>
+                    <li>любые подручные средства</li>
+                </ul>
+            </div>
+            
+            <div class="question">
+                <div class="question-title">7 По виду грузозахватного органа различают краны:</div>
+                <ul class="answers">
+                    <li>на гусеничном ходу, на колесном ходу, рельсовые</li>
+                    <li>электрические, механические, гидравлические</li>
+                    <li class="correct">крюковые, грейферные, магнитные</li>
+                </ul>
+            </div>
+            
+            <div class="question">
+                <div class="question-title">8 Тара — это:</div>
+                <ul class="answers">
+                    <li class="correct">изделие, предназначенные для размещения и упаковки грузов</li>
+                    <li>съемные грузозахватные приспособления, предназначенные для под-вески грузов к крюкам грузоподъемных машин</li>
+                    <li>приспособление для строповки и расстроповки беспетельных грузов различной геометрической формы</li>
+                </ul>
+            </div>
+            
+            <div class="question">
+                <div class="question-title">9 Складирование грузов — это:</div>
+                <ul class="answers">
+                    <li class="correct">технологический процесс приемки, выгрузки, размещения на хранение, хранения и выдачи грузов в производство</li>
+                    <li>способы приемки, выгрузки, размещения на хранение, хранения и выдачи грузов в производство</li>
+                </ul>
+            </div>
+            
+            <div class="question">
+                <div class="question-title">10 Грузовые крюки:</div>
+                <ul class="answers">
+                    <li>снабжаются предохранительным замком во всех случаях</li>
+                    <li>снабжаются предохранительным замком по усмотрению изготовителя</li>
+                    <li class="correct">снабжаются предохранительным замком во всех случаях, кроме тех, когда краны транспортируют расплавленный металл или жидкий шлак при использовании безлюдных технологий в условиях интенсивного теплового излучения</li>
+                </ul>
+            </div>
+			
+			<div class="question">
+                <div class="question-title">11 Основанием портального крана является:</div>
+                <ul class="answers">
+                    <li>опорно-поворотная платформа</li>
+                    <li>приводное устройство для передвижения крана</li>
+                    <li class="correct">портал</li>
+                </ul>
+            </div>
+			
+			
+            
+            <button class="back-btn" onclick="hideContent()">Вернуться к выбору</button>
+        </div>
+        
+        <div id="content2" class="content">
+            <h2>Программа обучения «Безопасные методы и приемы выполнения работ на высоте» (2 группа по безопасности работ на высоте)</h2>
+            
+            <div class="question">
+                <div class="question-title">Подниматься на кровлю и спускаться с нее следует только по:</div>
+                <ul class="answers">
+                    <li class="correct">Лестничным маршам</li>
+                    <li>Приставным лестницам</li>
+                    <li>Пожарным лестницам</li>
+                </ul>
+            </div>
+            
+            <div class="question">
+                <div class="question-title">С чем должны быть ознакомлены работники 2 группы по безопасности работ на высоте?</div>
+                <ul class="answers">
+                    <li>Порядку обучения персонала безопасным методам и приемам выполнения работ, практическим приемам оказания первой помощи</li>
+                    <li>Правилам по проведению инспекции СИЗ</li>
+                    <li class="correct">Правилами и требованиями пользования, применения, эксплуатации, выдачи, ухода, хранения, осмотра, испытаний, браковки и сертификации средств защиты</li>
+                    <li>Правилам по разработке плана производства работ</li>
+                </ul>
+            </div>
+            
+            <div class="question">
+                <div class="question-title">Какие меры безопасности должен принять работодатель для ограничения доступа работников и посторонних лиц в зоны повышенной опасности?</div>
+                <ul class="answers">
+                    <li>Оформление работ нарядом-допуском</li>
+                    <li>Назначение лиц ответственных за безопасное производство работ</li>
+                    <li class="correct">Ограждение рабочих мест</li>
+                    <li>В случае расположения в зонах повышенной опасности работа прекращаются</li>
+                </ul>
+            </div>
+            
+            <div class="question">
+                <div class="question-title">Работники 1 группы по безопасности работ на высоте дополнительно должны:</div>
+                <ul class="answers">
+                    <li class="correct">Знать методы и средства предупреждения несчастных случаев и профессиональных заболеваний</li>
+                    <li>Знать и уметь применять основы техники эвакуации при пожаре</li>
+                    <li>Обладать практическими навыками по сборке лесов и подмостей</li>
+                    <li>Верно все вышеперечисленное</li>
+                </ul>
+            </div>
+            
+            <div class="question">
+                <div class="question-title">Кто должен постоянно находится на рабочем месте с момента допуска по наряду-допуску?</div>
+                <ul class="answers">
+                    <li>Ответственный руководитель работ</li>
+                    <li>Работник из числа РСС</li>
+                    <li>Выдающий наряд-допуск</li>
+                    <li class="correct">Ответственный исполнитель работ</li>
+                </ul>
+            </div>
+            
+            <div class="question">
+                <div class="question-title">Кто может осуществлять повторный допуск по наряду-допуску в последующие смены на подготовленное рабочее место?</div>
+                <ul class="answers">
+                    <li>Выдающий наряд-допуск</li>
+                    <li>Ответственный производитель работ</li>
+                    <li>Наблюдающий</li>
+                    <li class="correct">Ответственный исполнитель работ с разрешения ответственного руководителя работ</li>
+                </ul>
+            </div>
+            
+            <div class="question">
+                <div class="question-title">Укажите периодичность испытаний металлических лестниц и стремянок?</div>
+                <ul class="answers">
+                    <li>1 раз в 6 месяцев</li>
+                    <li class="correct">1 раз в 12 месяцев</li>
+                    <li>1 раз в 24 месяца</li>
+                </ul>
+            </div>
+            
+            <div class="question">
+                <div class="question-title">При какой скорости ветра запрещается подъём на антенно-мачтовое сооружение?</div>
+                <ul class="answers">
+                    <li>Более 10 м/с</li>
+                    <li class="correct">Более 12 м/с</li>
+                    <li>Более 15 м/с</li>
+                </ul>
+            </div>
+            
+            <div class="question">
+                <div class="question-title">Дежурные СИЗ от падения с высоты должны в обязательном порядке быть оснащенными:</div>
+                <ul class="answers">
+                    <li>Противоогневой пропиткой</li>
+                    <li class="correct">Индикаторами срабатывания</li>
+                    <li>Амортизатором</li>
+                </ul>
+            </div>
+            
+            <div class="question">
+                <div class="question-title">На какие виды делятся системы обеспечения безопасности работ на высоте?</div>
+                <ul class="answers">
+                    <li>Удерживающие системы и системы позиционирования</li>
+                    <li>Системы спасения и эвакуации</li>
+                    <li>Страховочные системы</li>
+                    <li class="correct">Все вышеперечисленное</li>
+                </ul>
+            </div>
+            
+            <div class="question">
+                <div class="question-title">Люки и отверстия доступа сверху должны быть оборудованы:</div>
+                <ul class="answers">
+                    <li>Запирающими устройствами</li>
+                    <li class="correct">Защитными ограждениями</li>
+                    <li>Сигнальными плакатами, указывающие на перепад по высоте</li>
+                </ul>
+            </div>
+            
+            <div class="question">
+                <div class="question-title">Что должно быть выполнено до начала выполнения работ по наряду-допуску для выявления риска?</div>
+                <ul class="answers">
+                    <li>Подготовлены и разложены инструменты и оснастка</li>
+                    <li class="correct">Произведен осмотр рабочего места на предмет соответствия Правилам</li>
+                    <li>Огорожено рабочее место</li>
+                    <li>Вывешены плакаты безопасности</li>
+                </ul>
+            </div>
+            
+            <div class="question">
+                <div class="question-title">При проведении осмотра рабочих мест могут не учитываться:</div>
+                <ul class="answers">
+                    <li>Погодные условия</li>
+                    <li>Риск падения на работника материалов и предметов производства</li>
+                    <li>Использование сварочного и газопламенного оборудования</li>
+                    <li>Наличие острых кромок у элементов конструкций</li>
+                    <li class="correct">Риск розлива опасных продуктов на месте производства работ</li>
+                    <li>Опасные факторы, обусловленные местоположением анкерных устройств</li>
+                </ul>
+            </div>
+            
+            <div class="question">
+                <div class="question-title">Что входит в обязанности ответственного исполнителя работ?</div>
+                <ul class="answers">
+                    <li class="correct">Получать наряд-допуск на производство работ у должностного лица, выдающего наряд-допуск</li>
+                    <li>Допускать бригаду к работе по наряду-допуску непосредственно на месте выполнения работ</li>
+                    <li>Давать указание ответственному исполнителю по подготовке и приведению в исправность указанных в наряде-допуске инструментов</li>
+                    <li>Выводить членов бригады с места производства работ на время перерывов в ходе рабочей смены</li>
+                </ul>
+            </div>
+            
+            <div class="question">
+                <div class="question-title">Не допускается выполнение работ на высоте при монтаже и демонтаже конструкций с большой парустностью при скорости ветра:</div>
+                <ul class="answers">
+                    <li class="correct">10 м/с и более</li>
+                    <li>12 м/с и более</li>
+                    <li>15 м/с и более</li>
+                    <li>20 м/с и более</li>
+                </ul>
+            </div>
+            
+            <button class="back-btn" onclick="hideContent()">Вернуться к выбору</button>
+        </div>
+        
+        <!-- Шаблоны для остальных кнопок -->
+        <div id="content3" class="content">
+            <h2>Кнопка 3</h2>
+            <p>Контент для этой кнопки в разработке.</p>
+            <button class="back-btn" onclick="hideContent()">Вернуться к выбору</button>
+        </div>
+        
+        <div id="content4" class="content">
+            <h2>Кнопка 4</h2>
+            <p>Контент для этой кнопки в разработке.</p>
+            <button class="back-btn" onclick="hideContent()">Вернуться к выбору</button>
+        </div>
+        
+        <div id="content5" class="content">
+            <h2>Кнопка 5</h2>
+            <p>Контент для этой кнопки в разработке.</p>
+            <button class="back-btn" onclick="hideContent()">Вернуться к выбору</button>
+        </div>
+        
+        <div id="content6" class="content">
+            <h2>Кнопка 6</h2>
+            <p>Контент для этой кнопки в разработке.</p>
+            <button class="back-btn" onclick="hideContent()">Вернуться к выбору</button>
+        </div>
+        
+        <div id="content7" class="content">
+            <h2>Кнопка 7</h2>
+            <p>Контент для этой кнопки в разработке.</p>
+            <button class="back-btn" onclick="hideContent()">Вернуться к выбору</button>
+        </div>
+        
+        <div id="content8" class="content">
+            <h2>Кнопка 8</h2>
+            <p>Контент для этой кнопки в разработке.</p>
+            <button class="back-btn" onclick="hideContent()">Вернуться к выбору</button>
+        </div>
+        
+        <div id="content9" class="content">
+            <h2>Кнопка 9</h2>
+            <p>Контент для этой кнопки в разработке.</p>
+            <button class="back-btn" onclick="hideContent()">Вернуться к выбору</button>
+        </div>
+        
+        <div id="content10" class="content">
+            <h2>Кнопка 10</h2>
+            <p>Контент для этой кнопки в разработке.</p>
+            <button class="back-btn" onclick="hideContent()">Вернуться к выбору</button>
+        </div>
+        
+        <div id="content11" class="content">
+            <h2>Кнопка 11</h2>
+            <p>Контент для этой кнопки в разработке.</p>
+            <button class="back-btn" onclick="hideContent()">Вернуться к выбору</button>
+        </div>
+        
+        <div id="content12" class="content">
+            <h2>Кнопка 12</h2>
+            <p>Контент для этой кнопки в разработке.</p>
+            <button class="back-btn" onclick="hideContent()">Вернуться к выбору</button>
+        </div>
+        
+        <div id="content13" class="content">
+            <h2>Кнопка 13</h2>
+            <p>Контент для этой кнопки в разработке.</p>
+            <button class="back-btn" onclick="hideContent()">Вернуться к выбору</button>
+        </div>
+        
+        <div id="content14" class="content">
+            <h2>Кнопка 14</h2>
+            <p>Контент для этой кнопки в разработке.</p>
+            <button class="back-btn" onclick="hideContent()">Вернуться к выбору</button>
+        </div>
+        
+        <div id="content15" class="content">
+            <h2>Кнопка 15</h2>
+            <p>Контент для этой кнопки в разработке.</p>
+            <button class="back-btn" onclick="hideContent()">Вернуться к выбору</button>
+        </div>
+        
+        <div id="content16" class="content">
+            <h2>Кнопка 16</h2>
+            <p>Контент для этой кнопки в разработке.</p>
+            <button class="back-btn" onclick="hideContent()">Вернуться к выбору</button>
+        </div>
+        
+        <div id="content17" class="content">
+            <h2>Кнопка 17</h2>
+            <p>Контент для этой кнопки в разработке.</p>
+            <button class="back-btn" onclick="hideContent()">Вернуться к выбору</button>
+        </div>
+        
+        <div id="content18" class="content">
+            <h2>Кнопка 18</h2>
+            <p>Контент для этой кнопки в разработке.</p>
+            <button class="back-btn" onclick="hideContent()">Вернуться к выбору</button>
+        </div>
+        
+        <div id="content19" class="content">
+            <h2>Кнопка 19</h2>
+            <p>Контент для этой кнопки в разработке.</p>
+            <button class="back-btn" onclick="hideContent()">Вернуться к выбору</button>
+        </div>
+        
+        <div id="content20" class="content">
+            <h2>Кнопка 20</h2>
+            <p>Контент для этой кнопки в разработке.</p>
+            <button class="back-btn" onclick="hideContent()">Вернуться к выбору</button>
+        </div>
+    </div>
+
+    <script>
+        function showContent(contentId) {
+            // Скрываем все контенты
+            const contents = document.querySelectorAll('.content');
+            contents.forEach(content => {
+                content.classList.remove('active');
+            });
+            
+            // Показываем выбранный контент
+            document.getElementById(contentId).classList.add('active');
+            
+            // Прокручиваем к началу контента
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        }
+        
+        function hideContent() {
+            // Скрываем все контенты
+            const contents = document.querySelectorAll('.content');
+            contents.forEach(content => {
+                content.classList.remove('active');
+            });
+            
+            // Прокручиваем к кнопкам
+            document.querySelector('.buttons-container').scrollIntoView({
+                behavior: 'smooth'
+            });
+        }
+    </script>
+</body>
+</html>
